@@ -44,7 +44,7 @@ BLOCK = "hora_de_brilhar", "\n", { DAY }, "sempre_diva";
 
 DAY = "grunido", "\n", { STATEMENT }, "a_mimir";
 
-STATMENT = ("λ" | TASK_DECLARATION | ACTION_DECLARATION | WHILE_STATEMENT | IF_STATEMENT), "\n";
+STATMENT = ("λ" | TASK_DECLARATION | ACTION_DECLARATION | WHILE_STATEMENT | IF_STATEMENT | HABLAR), "\n";
 
 TASK_DECLARATION = "tarefa", ">>", "(", STRING, ",", NUMBER, ")" , "\n";
 
@@ -53,6 +53,8 @@ ACTION_DECLARATION = "acao", ">>", "(", STRING, ",", NUMBER, ")", "\n";
 WHILE_STATEMENT = "ENQUANTO_ELA_NAO_MUDA_DE_IDEIA", CONDICIONAL, ":", STATEMENT, "\n";
 
 IF_STATEMENT = "SE", CONDICIONAL, ":", STATEMENT, "\n";
+
+HABLAR = "hablar", "(", STRING, ",", NUMBER, ")", "\n";
 
 CONDICIONAL = "tarefa", ".", STRING, "\n";
 
