@@ -6,12 +6,11 @@ Linguagem de programação baseada na minha esposa, focando em programar o dia a
 
 ```bash
 hora_de_brilhar
-
     grunido
-        tarefa >> ("instagram", 60) 
-        tarefa >> ("se_arrumando_para_sair", 180)
-        tarefa >> ("soneca", 120)
-        tarefa >> ("brigar_com_nenem", 60)
+        tarefa << ("instagram", 60) 
+        tarefa << ("se_arrumando_para_sair", 180)
+        tarefa << ("soneca", 120)
+        tarefa << ("brigar_com_nenem", 60)
 
         ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.se_arrumando_para_sair:
             acao >> ("maquiagem", 60)
@@ -24,15 +23,14 @@ hora_de_brilhar
         
         ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.soneca:
             acao >> ("sonha_com_nenem", 10)
+            acao >> ("sonhar_com_ele_me_traindo", 110)
 
         ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.brigar_com_nenem:
             hablar ("tira o sapato do meio da casa", 15)
             hablar ("limpa a mesa", 15)
             hablar ("tira a toalha da cama", 15)
             hablar ("tira a roupa da maquina", 15)
-
     a_mimir
-
 sempre_diva
 ```
 
@@ -46,7 +44,7 @@ DAY = "grunido", "\n", { STATEMENT }, "a_mimir";
 
 STATMENT = ("λ" | TASK_DECLARATION | ACTION_DECLARATION | WHILE_STATEMENT | IF_STATEMENT | HABLAR), "\n";
 
-TASK_DECLARATION = "tarefa", ">>", "(", STRING, ",", NUMBER, ")" , "\n";
+TASK_DECLARATION = "tarefa", "<<", "(", STRING, ",", NUMBER, ")" , "\n";
 
 ACTION_DECLARATION = "acao", ">>", "(", STRING, ",", NUMBER, ")", "\n";
 
@@ -58,10 +56,9 @@ HABLAR = "hablar", "(", STRING, ",", NUMBER, ")", "\n";
 
 CONDICIONAL = "tarefa", ".", STRING, "\n";
 
-STRING = ( "a" | "..." | "z" | "A" | "..." | "Z" ) ;
+STRING = ( "a" | "..." | "z" | "A" | "..." | "Z" | "_") ;
 
 NUMBER = ( "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "0" ) ;
-
 
 ## Diagrama Sintático
 
