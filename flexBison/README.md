@@ -34,5 +34,11 @@ flex lexer.l
 3.Compile
 
 ```bash
-gcc lex.yy.c parser.tab.c
+gcc -o run parser.tab.c lex.yy.c -lfl
+```
+
+Ou, use o compile.sh
+
+```bash
+./compile.sh
 ```

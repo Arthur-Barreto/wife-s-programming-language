@@ -2,13 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdarg.h>
 
-%union {
-    char *string;
-    int integer;
-}
+void yyerror(const char *s);
+extern int yylex();
+void HABLAR(const char *format, ...);  // Declaração da função HABLAR
 
-/* Structure to store task information */
 typedef struct {
     char *name;
     int time;
@@ -28,9 +27,6 @@ Task* findTaskByName(const char *name) {
     return NULL;
 }
 
-extern int yylex();
-void yyerror(const char *s);
-
 /* Function to handle HABLAR */
 void HABLAR(const char *format, ...) {
     va_list args;
@@ -45,12 +41,20 @@ void HABLAR(const char *format, ...) {
         yyerror("Time exceeds 24 hours in a day");
     }
 }
+
 %}
+
+
+%union {
+    char *string;
+    int integer;
+}
 
 %token <string> STRING
 %token <integer> NUMBER
 %token HORA_DE_BRILHAR A_MIMIR SEMPRE_DIVA GRUNIDO ENQUANTO_ELA_NAO_MUDA_DE_IDEIA SE
 %token TAREFA_DECLARATION ACAO_DECLARATION
+%token LAMBDA
 
 %%
 
@@ -75,33 +79,30 @@ statements: statements statement
           | statement
           ;
 
-statement: "λ"
+statement: LAMBDA
          | TASK_DECLARATION
          | ACTION_DECLARATION
          | WHILE_STATEMENT
          | IF_STATEMENT
-         /* Removed HABLAR_STATEMENT */
+         | HABLAR_STATEMENT
          ;
 
-TASK_DECLARATION: TAREFA_DECLARATION '(' STRING ',' NUMBER ')' '\n'
+TASK_DECLARATION: "tarefa" "<<" '(' STRING ',' NUMBER ')' '\n'
                  {
-                     /* Store task information */
-                     tasks[numTasks].name = strdup($3);
-                     tasks[numTasks].time = $5;
+                     tasks[numTasks].name = strdup($4);
+                     tasks[numTasks].time = $6;
                      numTasks++;
-                     /* Deduct time from the day's time counter */
-                     timeSpentToday += $5;
-                     if (timeSpentToday > 24 * 60) { // Ensure time spent during the day does not exceed 24 hours
+                     timeSpentToday += $6;
+                     if (timeSpentToday > 24 * 60) {
                          yyerror("Time exceeds 24 hours in a day");
                      }
                  }
                  ;
 
-ACTION_DECLARATION: ACAO_DECLARATION '(' STRING ',' NUMBER ')' '\n'
+ACTION_DECLARATION: "acao" ">>" '(' STRING ',' NUMBER ')' '\n'
                    {
-                       /* Deduct time from the day's time counter */
-                       timeSpentToday += $5;
-                       if (timeSpentToday > 24 * 60) { // Ensure time spent during the day does not exceed 24 hours
+                       timeSpentToday += $6;
+                       if (timeSpentToday > 24 * 60) {
                            yyerror("Time exceeds 24 hours in a day");
                        }
                    }
@@ -111,12 +112,10 @@ WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL ':' statement '\n'
                 {
                     Task *task = findTaskByName($<string>3);
                     while (task && task->time >= $<integer>5) {
-                        /* Deduct time from the day's time counter */
                         timeSpentToday += task->time;
-                        if (timeSpentToday > 24 * 60) { // Ensure time spent during the day does not exceed 24 hours
+                        if (timeSpentToday > 24 * 60) {
                             yyerror("Time exceeds 24 hours in a day");
                         }
-                        /* Your semantic actions for while statement */
                         $<integer>5 -= task->time; // Reduce the time spent
                     }
                 }
@@ -126,25 +125,28 @@ IF_STATEMENT: SE CONDICIONAL ':' statement '\n'
              {
                  Task *task = findTaskByName($<string>3);
                  if (task && task->time >= $<integer>5) {
-                     /* Deduct time from the day's time counter */
                      timeSpentToday += task->time;
-                     if (timeSpentToday > 24 * 60) { // Ensure time spent during the day does not exceed 24 hours
+                     if (timeSpentToday > 24 * 60) {
                          yyerror("Time exceeds 24 hours in a day");
                      }
-                     /* Your semantic actions for if statement */
                  } else {
                      yyerror("Time exceeds task duration");
                  }
              }
              ;
 
-CONDICIONAL: TAREFA_DECLARATION '.' STRING '\n'
+HABLAR_STATEMENT: "hablar" '(' STRING ',' NUMBER ')' '\n'
+                 {
+                     HABLAR($3, $5);
+                 }
+                 ;
+
+CONDICIONAL: "tarefa" '.' STRING '\n'
            {
                Task *task = findTaskByName($3);
                if (!task) {
                    yyerror("Task not found");
                }
-               /* Your semantic actions for conditional */
            }
            ;
 
@@ -155,6 +157,11 @@ void yyerror(const char *s) {
 }
 
 int main() {
-    yyparse();
+    printf("Digite o programa:\n");
+    if (yyparse() == 0) {
+        printf("Programa aceito\n");
+    } else {
+        printf("Programa rejeitado\n");
+    }
     return 0;
 }
