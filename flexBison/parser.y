@@ -6,7 +6,6 @@
 
 void yyerror(const char *s);
 extern int yylex();
-void HABLAR(const char *format, ...);  // Declaração da função HABLAR
 
 typedef struct {
     char *name;
@@ -27,21 +26,6 @@ Task* findTaskByName(const char *name) {
     return NULL;
 }
 
-/* Function to handle HABLAR */
-void HABLAR(const char *format, ...) {
-    va_list args;
-    va_start(args, format);
-    vprintf(format, args);
-    va_end(args);
-    /* Consume time from the day's time counter */
-    int hablarTime;
-    sscanf(format, "%*[^,],%d", &hablarTime); // Extract time from the format string
-    timeSpentToday += hablarTime;
-    if (timeSpentToday > 24 * 60) { // Ensure time spent during the day does not exceed 24 hours
-        yyerror("Time exceeds 24 hours in a day");
-    }
-}
-
 %}
 
 
@@ -53,17 +37,12 @@ void HABLAR(const char *format, ...) {
 %token <string> STRING
 %token <integer> NUMBER
 %token HORA_DE_BRILHAR A_MIMIR SEMPRE_DIVA GRUNIDO ENQUANTO_ELA_NAO_MUDA_DE_IDEIA SE
-%token TAREFA_DECLARATION ACAO_DECLARATION
-%token LAMBDA
+%token TAREFA_DECLARATION ACAO_DECLARATION TAREFA ACAO DOT COLON HABLAR
 
 %%
 
-program: blocks
+program: block
        ;
-
-blocks: blocks block
-      | block
-      ;
 
 block: HORA_DE_BRILHAR '\n' days SEMPRE_DIVA
       ;
@@ -72,22 +51,22 @@ days: days day
     | day
     ;
 
-day: GRUNIDO '\n' { timeSpentToday = 0; } statements A_MIMIR
+day: GRUNIDO '\n' { timeSpentToday = 0; } statements A_MIMIR '\n'
     ;
 
 statements: statements statement
-          | statement
-          ;
+    | statement
+    ;
 
-statement: LAMBDA
-         | TASK_DECLARATION
+statement:
+         TASK_DECLARATION
          | ACTION_DECLARATION
          | WHILE_STATEMENT
          | IF_STATEMENT
          | HABLAR_STATEMENT
          ;
 
-TASK_DECLARATION: "tarefa" "<<" '(' STRING ',' NUMBER ')' '\n'
+TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' NUMBER ')' '\n'
                  {
                      tasks[numTasks].name = strdup($4);
                      tasks[numTasks].time = $6;
@@ -99,7 +78,7 @@ TASK_DECLARATION: "tarefa" "<<" '(' STRING ',' NUMBER ')' '\n'
                  }
                  ;
 
-ACTION_DECLARATION: "acao" ">>" '(' STRING ',' NUMBER ')' '\n'
+ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')'
                    {
                        timeSpentToday += $6;
                        if (timeSpentToday > 24 * 60) {
@@ -108,7 +87,7 @@ ACTION_DECLARATION: "acao" ">>" '(' STRING ',' NUMBER ')' '\n'
                    }
                    ;
 
-WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL ':' statement '\n'
+WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON '\n' statement '\n'
                 {
                     Task *task = findTaskByName($<string>3);
                     while (task && task->time >= $<integer>5) {
@@ -121,7 +100,7 @@ WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL ':' statement '\n'
                 }
                 ;
 
-IF_STATEMENT: SE CONDICIONAL ':' statement '\n'
+IF_STATEMENT: SE CONDICIONAL COLON '\n' statement '\n'
              {
                  Task *task = findTaskByName($<string>3);
                  if (task && task->time >= $<integer>5) {
@@ -135,13 +114,19 @@ IF_STATEMENT: SE CONDICIONAL ':' statement '\n'
              }
              ;
 
-HABLAR_STATEMENT: "hablar" '(' STRING ',' NUMBER ')' '\n'
+HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')'
                  {
-                     HABLAR($3, $5);
+                    printf("HABLAR: %s, %d\n", $3, $5);
+                    int hablarTime = $5;
+                    timeSpentToday += hablarTime;
+                    if (timeSpentToday > 24 * 60) { // Ensure time spent during the day does not exceed 24 hours
+                        yyerror("Time exceeds 24 hours in a day");
+                        exit(1);
+                    }
                  }
                  ;
 
-CONDICIONAL: "tarefa" '.' STRING '\n'
+CONDICIONAL: TAREFA DOT STRING
            {
                Task *task = findTaskByName($3);
                if (!task) {

@@ -1,4 +1,16 @@
 hora_de_brilhar
     grunido
+        tarefa << (instagram, 1) 
+        tarefa << (se_arrumando_para_sair, 3)
+        tarefa << (soneca, 2)
+        tarefa << (brigar_com_nenem, 1)
+        ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.se_arrumando_para_sair:
+            acao >> (maquiagem, 1)
+        SE tarefa.instagram:
+            acao >> (tirando_foto, 1)
+        ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.soneca:
+            acao >> (sonha_com_nenem, 1)
+        ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.brigar_com_nenem:
+            hablar (tira_o_sapato_do_meio_da_casa, 1)
     a_mimir
 sempre_diva

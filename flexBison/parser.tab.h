@@ -64,7 +64,11 @@ extern int yydebug;
     SE = 265,                      /* SE  */
     TAREFA_DECLARATION = 266,      /* TAREFA_DECLARATION  */
     ACAO_DECLARATION = 267,        /* ACAO_DECLARATION  */
-    LAMBDA = 268                   /* LAMBDA  */
+    TAREFA = 268,                  /* TAREFA  */
+    ACAO = 269,                    /* ACAO  */
+    DOT = 270,                     /* DOT  */
+    COLON = 271,                   /* COLON  */
+    HABLAR = 272                   /* HABLAR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -73,12 +77,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 48 "parser.y"
+#line 32 "parser.y"
 
     char *string;
     int integer;
 
-#line 82 "parser.tab.h"
+#line 86 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

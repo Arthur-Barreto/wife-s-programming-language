@@ -42,3 +42,9 @@ Ou, use o compile.sh
 ```bash
 ./compile.sh
 ```
+
+Antes de rodar, de permissão de execução
+
+```bash
+chmod +x compile.sh
+```
