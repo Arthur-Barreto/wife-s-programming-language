@@ -40,7 +40,7 @@ PROGRAM = { BLOCK };
 
 BLOCK = "hora_de_brilhar", "\n", { DAY }, "sempre_diva";
 
-DAY = "grunido", "\n", { STATEMENT }, "a_mimir";
+DAY = "grunido", "\n", { STATEMENT }, "a_mimir", "\n";
 
 STATMENT = ("λ" | TASK_DECLARATION | ACTION_DECLARATION | WHILE_STATEMENT | IF_STATEMENT | HABLAR), "\n";
 

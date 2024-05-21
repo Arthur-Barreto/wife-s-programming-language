@@ -818,109 +818,90 @@ YY_RULE_SETUP
 case 6:
 YY_RULE_SETUP
 #line 12 "lexer.l"
-{ return SE; }
+{ printf("achei se\n"); return SE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 13 "lexer.l"
-{
-                        printf("achei .\n");
-                         return DOT; 
-                        }
+{ printf("achei .\n"); return DOT; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 17 "lexer.l"
-{
-                        printf("achei :\n");
-                         return COLON; 
-                        }
+#line 14 "lexer.l"
+{ printf("achei :\n"); return COLON; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 21 "lexer.l"
-{ 
-                        printf("achei <<\n");
-                        return TAREFA_DECLARATION; 
-                        }
+#line 15 "lexer.l"
+{ printf("achei <<\n"); return TAREFA_DECLARATION; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 25 "lexer.l"
-{ 
-                        printf("achei >>\n");
-                        return ACAO_DECLARATION; 
-                        }
+#line 16 "lexer.l"
+{ printf("achei >>\n"); return ACAO_DECLARATION; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 29 "lexer.l"
+#line 17 "lexer.l"
 { return TAREFA; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 30 "lexer.l"
+#line 18 "lexer.l"
 { return HABLAR; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 31 "lexer.l"
-{
-                        printf("achei acao\n");
-                        return ACAO; 
-                        }
+#line 19 "lexer.l"
+{ printf("achei acao\n"); return ACAO; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 35 "lexer.l"
+#line 20 "lexer.l"
 { printf("Salve"); return '('; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 36 "lexer.l"
+#line 21 "lexer.l"
 { return ')'; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 37 "lexer.l"
+#line 22 "lexer.l"
 { return ','; }
 	YY_BREAK
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 38 "lexer.l"
+#line 23 "lexer.l"
 { printf("n\n"); return '\n'; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 39 "lexer.l"
-{ 
-                        yylval.string = strdup(yytext); 
-                        printf("achei string: %s\n", yylval.string);
-                        return STRING; 
-                        }
+#line 24 "lexer.l"
+{ yylval.string = strdup(yytext); printf("achei string: %s\n", yylval.string); return STRING; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 44 "lexer.l"
+#line 25 "lexer.l"
 { yylval.integer = atoi(yytext); return NUMBER; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 45 "lexer.l"
+#line 26 "lexer.l"
 ; /* ignore whitespace */
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 47 "lexer.l"
+#line 28 "lexer.l"
 { printf("Unexpected character: %s\n", yytext); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 49 "lexer.l"
+#line 30 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 924 "lex.yy.c"
+#line 905 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1925,5 +1906,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 49 "lexer.l"
+#line 30 "lexer.l"
+
 
