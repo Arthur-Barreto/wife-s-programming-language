@@ -9,14 +9,21 @@ hora_de_brilhar
             acao >> (maquiagem, 60)
             acao >> (escolhendo_roupa, 60)
             acao >> (arrumando_cabelo, 60)
-        QUERO_PITIDAS
+            hablar (vou_sair, 1)
+        QUERO_PITDAS
         SE tarefa.instagram
         TO_COM_FOME
+            hablar (vou_sair, 1)
             acao >> (tirando_foto, 30)
             acao >> (postando_foto, 30)
-        QUERO_PITIDAS
+        QUERO_PITDAS
     a_mimir
     grunido
-        tarefa << (instagram, 1)
+        hablar (vou_dormir, 1)
+        tarefa << (soneca, 2)
+        SE tarefa.soneca
+        TO_COM_FOME
+            hablar (vou_comer, 1)
+        QUERO_PITDAS
     a_mimir
 sempre_diva

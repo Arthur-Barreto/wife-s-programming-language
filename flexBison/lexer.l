@@ -20,12 +20,11 @@
 ")"                      { printf("close paren\n"); return ')'; }
 ","                      { printf("achei ,\n"); return ','; }
 "\n"                     { printf("n\n"); return '\n'; }
-"TO_COM_FOME"        { printf("open {\n"); return BLOCK_BEGIN; }
-"QUERO_PITIDAS"          { printf("close }\n"); return BLOCK_END; }
+"TO_COM_FOME"            { printf("open {\n"); return BLOCK_BEGIN; }
+"QUERO_PITDAS"           { printf("close }\n"); return BLOCK_END; }
 [a-zA-Z_]+               { yylval.string = strdup(yytext); printf("achei string: %s\n", yylval.string); return STRING; }
 [0-9]+                   { yylval.integer = atoi(yytext); printf("achei number: %d\n", yylval.integer); return NUMBER; }
 [ \t]+                   ; /* ignore whitespace */
 .                        { printf("Unexpected character: %s\n", yytext); }
 
 %%
-
