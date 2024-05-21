@@ -4,10 +4,10 @@
 set -e
 
 # Gerar o parser com Bison
-bison -d parser.y
+bison -d parser.y -Wcounterexamples -v
 
 # Gerar o lexer com Flex
 flex lexer.l
 
 # Compilar os arquivos gerados com GCC
-gcc -o run parser.tab.c lex.yy.c -lfl
+gcc -o  run parser.tab.c lex.yy.c -lfl

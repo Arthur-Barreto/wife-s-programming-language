@@ -17,13 +17,16 @@ extern int yylex();
 %token <integer> NUMBER
 %token HORA_DE_BRILHAR A_MIMIR SEMPRE_DIVA GRUNIDO ENQUANTO_ELA_NAO_MUDA_DE_IDEIA SE
 %token TAREFA_DECLARATION ACAO_DECLARATION TAREFA ACAO DOT COLON HABLAR
+%token BLOCK_BEGIN BLOCK_END
+
+%start program
 
 %%
 
 program: block
        ;
 
-block: HORA_DE_BRILHAR '\n' days SEMPRE_DIVA
+block: HORA_DE_BRILHAR '\n' days SEMPRE_DIVA '\n'
       ;
 
 days: days day
@@ -33,9 +36,15 @@ days: days day
 day: GRUNIDO '\n' statements A_MIMIR '\n'
     ;
 
-statements: statements statement
-    | statement
+statements: statement
+    | statements statement
     ;
+
+block_statements: BLOCK_BEGIN '\n' statements BLOCK_END '\n'
+                {
+                    printf("Bloco de instruções\n");
+                }
+                ;
 
 statement:
          TASK_DECLARATION
@@ -57,13 +66,13 @@ ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')' '\n'
                 }
                 ;
 
-WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON '\n' statement '\n'
+WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON '\n' block_statements
                 {
                     printf("ENQUANTO\n");
                 }
                 ;
 
-IF_STATEMENT: SE CONDICIONAL COLON '\n' statement
+IF_STATEMENT: SE CONDICIONAL COLON '\n' block_statements
                 {
                     printf("SE\n");
                 }
@@ -77,7 +86,7 @@ HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')' '\n'
 
 CONDICIONAL: TAREFA DOT STRING
                 {
-                    printf("tarefa . dot");
+                    printf("tarefa . string\n");
                 }
                 ;
 
