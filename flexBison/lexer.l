@@ -4,7 +4,7 @@
 
 %%
 
-"hora_de_brilhar"        { printf("achei hora_de_brilhar\n");  return HORA_DE_BRILHAR; }
+"hora_de_brilhar"        { printf("achei hora_de_brilhar\n"); return HORA_DE_BRILHAR; }
 "sempre_diva"            { printf("achei sempre_diva\n"); return SEMPRE_DIVA; }
 "grunido"                { printf("achei grunido\n"); return GRUNIDO; }
 "a_mimir"                { printf("achei a_mimir\n"); return A_MIMIR; }
@@ -20,11 +20,12 @@
 ")"                      { printf("close paren\n"); return ')'; }
 ","                      { printf("achei ,\n"); return ','; }
 "\n"                     { printf("n\n"); return '\n'; }
-"{"                      { printf("open {\n"); return BLOCK_BEGIN; }
-"}"                      { printf("close }\n"); return BLOCK_END; }
+"TO_COM_FOME"        { printf("open {\n"); return BLOCK_BEGIN; }
+"QUERO_PITIDAS"          { printf("close }\n"); return BLOCK_END; }
 [a-zA-Z_]+               { yylval.string = strdup(yytext); printf("achei string: %s\n", yylval.string); return STRING; }
 [0-9]+                   { yylval.integer = atoi(yytext); printf("achei number: %d\n", yylval.integer); return NUMBER; }
 [ \t]+                   ; /* ignore whitespace */
 .                        { printf("Unexpected character: %s\n", yytext); }
 
 %%
+

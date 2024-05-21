@@ -5,15 +5,18 @@ hora_de_brilhar
         tarefa << (soneca, 2)
         tarefa << (brigar_com_nenem, 1)
         ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.se_arrumando_para_sair
-        {
+        TO_COM_FOME
             acao >> (maquiagem, 60)
             acao >> (escolhendo_roupa, 60)
             acao >> (arrumando_cabelo, 60)
-        }
+        QUERO_PITIDAS
         SE tarefa.instagram
-        {
+        TO_COM_FOME
             acao >> (tirando_foto, 30)
             acao >> (postando_foto, 30)
-        }
+        QUERO_PITIDAS
+    a_mimir
+    grunido
+        tarefa << (instagram, 1)
     a_mimir
 sempre_diva
