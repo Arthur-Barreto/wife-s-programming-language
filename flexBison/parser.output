@@ -26,9 +26,9 @@ Grammar
 
    15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')' '\n'
 
-   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON '\n' block_statements
+   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL '\n' block_statements
 
-   17 IF_STATEMENT: SE CONDICIONAL COLON '\n' block_statements
+   17 IF_STATEMENT: SE CONDICIONAL '\n' block_statements
 
    18 HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')' '\n'
 
@@ -56,53 +56,52 @@ Terminals, with rules where they appear
     TAREFA (268) 14 19
     ACAO (269) 15
     DOT (270) 19
-    COLON (271) 16 17
-    HABLAR (272) 18
-    BLOCK_BEGIN (273) 8
-    BLOCK_END (274) 8
+    HABLAR (271) 18
+    BLOCK_BEGIN (272) 8
+    BLOCK_END (273) 8
 
 
 Nonterminals, with rules where they appear
 
-    $accept (24)
+    $accept (23)
         on left: 0
-    program (25)
+    program (24)
         on left: 1
         on right: 0
-    block (26)
+    block (25)
         on left: 2
         on right: 1
-    days (27)
+    days (26)
         on left: 3 4
         on right: 2 3
-    day (28)
+    day (27)
         on left: 5
         on right: 3 4
-    statements (29)
+    statements (28)
         on left: 6 7
         on right: 5 7 8
-    block_statements (30)
+    block_statements (29)
         on left: 8
         on right: 16 17
-    statement (31)
+    statement (30)
         on left: 9 10 11 12 13
         on right: 6 7
-    TASK_DECLARATION (32)
+    TASK_DECLARATION (31)
         on left: 14
         on right: 9
-    ACTION_DECLARATION (33)
+    ACTION_DECLARATION (32)
         on left: 15
         on right: 10
-    WHILE_STATEMENT (34)
+    WHILE_STATEMENT (33)
         on left: 16
         on right: 11
-    IF_STATEMENT (35)
+    IF_STATEMENT (34)
         on left: 17
         on right: 12
-    HABLAR_STATEMENT (36)
+    HABLAR_STATEMENT (35)
         on left: 18
         on right: 13
-    CONDICIONAL (37)
+    CONDICIONAL (36)
         on left: 19
         on right: 16 17
 
@@ -215,7 +214,7 @@ State 11
 
 State 12
 
-   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA • CONDICIONAL COLON '\n' block_statements
+   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA • CONDICIONAL '\n' block_statements
 
     TAREFA  shift, and go to state 25
 
@@ -224,7 +223,7 @@ State 12
 
 State 13
 
-   17 IF_STATEMENT: SE • CONDICIONAL COLON '\n' block_statements
+   17 IF_STATEMENT: SE • CONDICIONAL '\n' block_statements
 
     TAREFA  shift, and go to state 25
 
@@ -330,16 +329,16 @@ State 25
 
 State 26
 
-   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL • COLON '\n' block_statements
+   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL • '\n' block_statements
 
-    COLON  shift, and go to state 34
+    '\n'  shift, and go to state 34
 
 
 State 27
 
-   17 IF_STATEMENT: SE CONDICIONAL • COLON '\n' block_statements
+   17 IF_STATEMENT: SE CONDICIONAL • '\n' block_statements
 
-    COLON  shift, and go to state 35
+    '\n'  shift, and go to state 35
 
 
 State 28
@@ -386,37 +385,41 @@ State 33
 
 State 34
 
-   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON • '\n' block_statements
+   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL '\n' • block_statements
 
-    '\n'  shift, and go to state 41
+    BLOCK_BEGIN  shift, and go to state 41
+
+    block_statements  go to state 42
 
 
 State 35
 
-   17 IF_STATEMENT: SE CONDICIONAL COLON • '\n' block_statements
+   17 IF_STATEMENT: SE CONDICIONAL '\n' • block_statements
 
-    '\n'  shift, and go to state 42
+    BLOCK_BEGIN  shift, and go to state 41
+
+    block_statements  go to state 43
 
 
 State 36
 
    14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' • STRING ',' NUMBER ')' '\n'
 
-    STRING  shift, and go to state 43
+    STRING  shift, and go to state 44
 
 
 State 37
 
    15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' • STRING ',' NUMBER ')' '\n'
 
-    STRING  shift, and go to state 44
+    STRING  shift, and go to state 45
 
 
 State 38
 
    18 HABLAR_STATEMENT: HABLAR '(' STRING • ',' NUMBER ')' '\n'
 
-    ','  shift, and go to state 45
+    ','  shift, and go to state 46
 
 
 State 39
@@ -435,86 +438,47 @@ State 40
 
 State 41
 
-   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON '\n' • block_statements
+    8 block_statements: BLOCK_BEGIN • '\n' statements BLOCK_END '\n'
 
-    BLOCK_BEGIN  shift, and go to state 46
-
-    block_statements  go to state 47
+    '\n'  shift, and go to state 47
 
 
 State 42
 
-   17 IF_STATEMENT: SE CONDICIONAL COLON '\n' • block_statements
-
-    BLOCK_BEGIN  shift, and go to state 46
-
-    block_statements  go to state 48
-
-
-State 43
-
-   14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING • ',' NUMBER ')' '\n'
-
-    ','  shift, and go to state 49
-
-
-State 44
-
-   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING • ',' NUMBER ')' '\n'
-
-    ','  shift, and go to state 50
-
-
-State 45
-
-   18 HABLAR_STATEMENT: HABLAR '(' STRING ',' • NUMBER ')' '\n'
-
-    NUMBER  shift, and go to state 51
-
-
-State 46
-
-    8 block_statements: BLOCK_BEGIN • '\n' statements BLOCK_END '\n'
-
-    '\n'  shift, and go to state 52
-
-
-State 47
-
-   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON '\n' block_statements •
+   16 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL '\n' block_statements •
 
     $default  reduce using rule 16 (WHILE_STATEMENT)
 
 
-State 48
+State 43
 
-   17 IF_STATEMENT: SE CONDICIONAL COLON '\n' block_statements •
+   17 IF_STATEMENT: SE CONDICIONAL '\n' block_statements •
 
     $default  reduce using rule 17 (IF_STATEMENT)
 
 
-State 49
+State 44
 
-   14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' • NUMBER ')' '\n'
+   14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING • ',' NUMBER ')' '\n'
 
-    NUMBER  shift, and go to state 53
-
-
-State 50
-
-   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' • NUMBER ')' '\n'
-
-    NUMBER  shift, and go to state 54
+    ','  shift, and go to state 48
 
 
-State 51
+State 45
 
-   18 HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER • ')' '\n'
+   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING • ',' NUMBER ')' '\n'
 
-    ')'  shift, and go to state 55
+    ','  shift, and go to state 49
 
 
-State 52
+State 46
+
+   18 HABLAR_STATEMENT: HABLAR '(' STRING ',' • NUMBER ')' '\n'
+
+    NUMBER  shift, and go to state 50
+
+
+State 47
 
     8 block_statements: BLOCK_BEGIN '\n' • statements BLOCK_END '\n'
 
@@ -524,7 +488,7 @@ State 52
     ACAO                            shift, and go to state 15
     HABLAR                          shift, and go to state 16
 
-    statements          go to state 56
+    statements          go to state 51
     statement           go to state 18
     TASK_DECLARATION    go to state 19
     ACTION_DECLARATION  go to state 20
@@ -533,28 +497,28 @@ State 52
     HABLAR_STATEMENT    go to state 23
 
 
-State 53
+State 48
 
-   14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' NUMBER • ')' '\n'
+   14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' • NUMBER ')' '\n'
 
-    ')'  shift, and go to state 57
-
-
-State 54
-
-   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER • ')' '\n'
-
-    ')'  shift, and go to state 58
+    NUMBER  shift, and go to state 52
 
 
-State 55
+State 49
 
-   18 HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')' • '\n'
+   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' • NUMBER ')' '\n'
 
-    '\n'  shift, and go to state 59
+    NUMBER  shift, and go to state 53
 
 
-State 56
+State 50
+
+   18 HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER • ')' '\n'
+
+    ')'  shift, and go to state 54
+
+
+State 51
 
     7 statements: statements • statement
     8 block_statements: BLOCK_BEGIN '\n' statements • BLOCK_END '\n'
@@ -564,7 +528,7 @@ State 56
     TAREFA                          shift, and go to state 14
     ACAO                            shift, and go to state 15
     HABLAR                          shift, and go to state 16
-    BLOCK_END                       shift, and go to state 60
+    BLOCK_END                       shift, and go to state 55
 
     statement           go to state 32
     TASK_DECLARATION    go to state 19
@@ -574,50 +538,71 @@ State 56
     HABLAR_STATEMENT    go to state 23
 
 
-State 57
+State 52
+
+   14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' NUMBER • ')' '\n'
+
+    ')'  shift, and go to state 56
+
+
+State 53
+
+   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER • ')' '\n'
+
+    ')'  shift, and go to state 57
+
+
+State 54
+
+   18 HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')' • '\n'
+
+    '\n'  shift, and go to state 58
+
+
+State 55
+
+    8 block_statements: BLOCK_BEGIN '\n' statements BLOCK_END • '\n'
+
+    '\n'  shift, and go to state 59
+
+
+State 56
 
    14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' NUMBER ')' • '\n'
+
+    '\n'  shift, and go to state 60
+
+
+State 57
+
+   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')' • '\n'
 
     '\n'  shift, and go to state 61
 
 
 State 58
 
-   15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')' • '\n'
-
-    '\n'  shift, and go to state 62
-
-
-State 59
-
    18 HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')' '\n' •
 
     $default  reduce using rule 18 (HABLAR_STATEMENT)
 
 
+State 59
+
+    8 block_statements: BLOCK_BEGIN '\n' statements BLOCK_END '\n' •
+
+    $default  reduce using rule 8 (block_statements)
+
+
 State 60
-
-    8 block_statements: BLOCK_BEGIN '\n' statements BLOCK_END • '\n'
-
-    '\n'  shift, and go to state 63
-
-
-State 61
 
    14 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' NUMBER ')' '\n' •
 
     $default  reduce using rule 14 (TASK_DECLARATION)
 
 
-State 62
+State 61
 
    15 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')' '\n' •
 
     $default  reduce using rule 15 (ACTION_DECLARATION)
-
-
-State 63
-
-    8 block_statements: BLOCK_BEGIN '\n' statements BLOCK_END '\n' •
-
-    $default  reduce using rule 8 (block_statements)

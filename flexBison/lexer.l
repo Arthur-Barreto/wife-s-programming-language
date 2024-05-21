@@ -11,7 +11,6 @@
 "ENQUANTO_ELA_NAO_MUDA_DE_IDEIA"  { printf("achei ENQUANTO_ELA_NAO_MUDA_DE_IDEIA\n"); return ENQUANTO_ELA_NAO_MUDA_DE_IDEIA; }
 "SE"                     { printf("achei SE\n"); return SE; }
 "."                      { printf("achei .\n"); return DOT; }
-":"                      { printf("achei :\n"); return COLON; }
 "<<"                     { printf("achei <<\n"); return TAREFA_DECLARATION; }
 ">>"                     { printf("achei >>\n"); return ACAO_DECLARATION; }
 "tarefa"                 { printf("task\n"); return TAREFA; }

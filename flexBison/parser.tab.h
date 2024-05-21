@@ -67,10 +67,9 @@ extern int yydebug;
     TAREFA = 268,                  /* TAREFA  */
     ACAO = 269,                    /* ACAO  */
     DOT = 270,                     /* DOT  */
-    COLON = 271,                   /* COLON  */
-    HABLAR = 272,                  /* HABLAR  */
-    BLOCK_BEGIN = 273,             /* BLOCK_BEGIN  */
-    BLOCK_END = 274                /* BLOCK_END  */
+    HABLAR = 271,                  /* HABLAR  */
+    BLOCK_BEGIN = 272,             /* BLOCK_BEGIN  */
+    BLOCK_END = 273                /* BLOCK_END  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -84,7 +83,7 @@ union YYSTYPE
     char *string;
     int integer;
 
-#line 88 "parser.tab.h"
+#line 87 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

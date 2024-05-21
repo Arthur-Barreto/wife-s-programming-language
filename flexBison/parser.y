@@ -16,7 +16,7 @@ extern int yylex();
 %token <string> STRING
 %token <integer> NUMBER
 %token HORA_DE_BRILHAR A_MIMIR SEMPRE_DIVA GRUNIDO ENQUANTO_ELA_NAO_MUDA_DE_IDEIA SE
-%token TAREFA_DECLARATION ACAO_DECLARATION TAREFA ACAO DOT COLON HABLAR
+%token TAREFA_DECLARATION ACAO_DECLARATION TAREFA ACAO DOT HABLAR
 %token BLOCK_BEGIN BLOCK_END
 
 %start program
@@ -66,13 +66,13 @@ ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')' '\n'
                 }
                 ;
 
-WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL COLON '\n' block_statements
+WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL '\n' block_statements
                 {
                     printf("ENQUANTO\n");
                 }
                 ;
 
-IF_STATEMENT: SE CONDICIONAL COLON '\n' block_statements
+IF_STATEMENT: SE CONDICIONAL '\n' block_statements
                 {
                     printf("SE\n");
                 }
