@@ -9,7 +9,8 @@ from block import Block
 from while_node import WhileOp
 from if_node import IfOp
 from str_val import StrVal
-from var_dec import VarDec  
+from var_dec import VarDec
+from conditional_node import ConditionalNode
 
 
 class Parser:
@@ -57,12 +58,10 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'GRUNIDO'")
 
         Parser.tokenizer.select_next()
-
 
         statements = Parser.parse_statements()
 
@@ -71,12 +70,10 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'A_MIMIR'")
 
         Parser.tokenizer.select_next()
-
 
         return Block(children=statements)
 
@@ -134,14 +131,12 @@ class Parser:
         string_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
 
-
         if Parser.tokenizer.next.type != "COMMA":
             raise SyntaxError("Expected ',' after string value")
 
         Parser.tokenizer.select_next()
         number_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
-
 
         if Parser.tokenizer.next.type != "RPAREN":
             raise SyntaxError("Expected ')' after number value")
@@ -208,6 +203,7 @@ class Parser:
 
     @staticmethod
     def parse_if_statement():
+        # print("entrei no caso do if")
         if Parser.tokenizer.next.type != "SE":
             raise SyntaxError("Expected 'SE' at the beginning of the if statement")
 
@@ -265,10 +261,7 @@ class Parser:
         Parser.tokenizer.select_next()
         string_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
-        return BinOp(
-            value="CONDICIONAL",
-            children=[Identifier(value="TAREFA"), StrVal(value=string_val)],
-        )
+        return ConditionalNode(value=string_val)
 
     @staticmethod
     def parse_block_statements():

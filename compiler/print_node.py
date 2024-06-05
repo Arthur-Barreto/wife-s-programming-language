@@ -6,4 +6,7 @@ class Print(Node):
         super().__init__(None, children)
 
     def evaluate(self, symble_table):
-        print(self.children[0].evaluate(symble_table))
+        task = self.children[0].evaluate(symble_table)
+        time = self.children[1].evaluate(symble_table)
+        # print(f"{task} {time}")
+        return time

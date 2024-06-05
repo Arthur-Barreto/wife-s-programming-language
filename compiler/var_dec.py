@@ -10,3 +10,5 @@ class VarDec(Node):
         symble_table.create_identifier(
             key=self.children[0], value=self.children[1]
         )
+        
+        return 0

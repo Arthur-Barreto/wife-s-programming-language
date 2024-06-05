@@ -1,5 +1,10 @@
 HORA_DE_BRILHAR
-    GRUNIDO
-        HABLAR (vou_dormir, 10)
+GRUNIDO
+        HABLAR (vou_dormir, 5)
+        TAREFA << (soneca, 200)
+        SE TAREFA.soneca
+        TO_COM_FOME
+            HABLAR (vou_comer, 1)
+        QUERO_PITDAS
     A_MIMIR
 SEMPRE_DIVA

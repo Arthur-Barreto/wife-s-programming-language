@@ -31,7 +31,9 @@ class Tokenizer:
             raise TypeError("Empty Input")
 
     def select_next(self):
-
+        
+        # print(f"token: {self.next.type} value: {self.next.value}")
+        
         while self.position < len(self.source):
             char = self.source[self.position]
 

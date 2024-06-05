@@ -7,12 +7,15 @@ class IfOp(Node):
 
     def evaluate(self, symble_table):
 
-        conditional = self.children[0].evaluate(symble_table)
-        if_block = self.children[1].evaluate(symble_table)
-        else_block = self.children[2].evaluate(symble_table)
+        cond_node_ret = self.children[0].evaluate(symble_table)
+        conditional = cond_node_ret[0]
+        task_name = cond_node_ret[1]
+        time_if_block = self.children[1].evaluate(symble_table)
+        
+        print(f"conditional {conditional} task_name {task_name} time_if_block {time_if_block}")
 
         if conditional:
-            if_block
-
-        else:
-            else_block
+            print(f"{task_name} realizada, gastando {time_if_block} minutos")
+            symble_table.consume_day_time(task_name, time_if_block)
+            print(f"total de minutos restantes {symble_table.day_time}")
+            symble_table.consume_token_time(task_name, time_if_block)
