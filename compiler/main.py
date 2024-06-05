@@ -14,7 +14,7 @@ if __name__ == "__main__":
     if Parser.tokenizer.next.type != "EOF":
         raise SyntaxError("Should have an operator! ")
 
-    # result = tree.evaluate(symble_table=s_table)
+    result = tree.evaluate(symble_table=s_table)
 
     # if result != None:
     #     print(result)

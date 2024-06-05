@@ -1,6 +1,5 @@
 from tokenizer import Tokenizer
 from bin_op import BinOp
-from un_op import UnOp
 from int_val import IntVal
 from no_op import NoOp
 from assignment import Assignment
@@ -9,10 +8,8 @@ from print_node import Print
 from block import Block
 from while_node import WhileOp
 from if_node import IfOp
-from read_val import ReadVal
 from str_val import StrVal
-from var_dec import VarDec
-from return_node import ReturnNode
+from var_dec import VarDec  
 
 
 class Parser:
@@ -20,10 +17,6 @@ class Parser:
 
     @staticmethod
     def parse_block():
-
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "HORA_DE_BRILHAR":
             raise SyntaxError(
@@ -36,10 +29,6 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
-
         block = Block(children=Parser.parse_days())
 
         if Parser.tokenizer.next.type != "SEMPRE_DIVA":
@@ -47,18 +36,10 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
-
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'SEMPRE_DIVA'")
 
         Parser.tokenizer.select_next()
-
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         return block
 
@@ -76,18 +57,12 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'GRUNIDO'")
 
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         statements = Parser.parse_statements()
 
@@ -96,18 +71,12 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'A_MIMIR'")
 
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         return Block(children=statements)
 
@@ -122,10 +91,6 @@ class Parser:
     def parse_statement():
         if Parser.tokenizer.next.type == "NEWLINE":
             Parser.tokenizer.select_next()
-
-            print(
-                f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-            )
 
             return NoOp()
 
@@ -158,58 +123,34 @@ class Parser:
             )
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "TAREFA_DECLARATION":
             raise SyntaxError("Expected task declaration")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "LPAREN":
             raise SyntaxError("Expected '(' after task declaration")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         string_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "COMMA":
             raise SyntaxError("Expected ',' after string value")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         number_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
 
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "RPAREN":
             raise SyntaxError("Expected ')' after number value")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after task declaration")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         return VarDec(value="TAREFA", children=[string_val, number_val])
 
     @staticmethod
@@ -220,56 +161,32 @@ class Parser:
             )
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "ACAO_DECLARATION":
             raise SyntaxError("Expected action declaration")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "LPAREN":
             raise SyntaxError("Expected '(' after action declaration")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         string_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "COMMA":
             raise SyntaxError("Expected ',' after string value")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         number_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "RPAREN":
             raise SyntaxError("Expected ')' after number value")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after action declaration")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         return VarDec(value="ACAO", children=[string_val, number_val])
 
     @staticmethod
@@ -280,18 +197,12 @@ class Parser:
             )
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         condition = Parser.parse_conditional()
 
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after condition")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         block_statements = Parser.parse_block_statements()
         return WhileOp(value="ENQUANTO", children=[condition, block_statements])
 
@@ -301,18 +212,12 @@ class Parser:
             raise SyntaxError("Expected 'SE' at the beginning of the if statement")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         condition = Parser.parse_conditional()
 
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after condition")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         block_statements = Parser.parse_block_statements()
         return IfOp(value="SE", children=[condition, block_statements])
 
@@ -324,49 +229,28 @@ class Parser:
             )
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "LPAREN":
             raise SyntaxError("Expected '(' after 'HABLAR'")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         string_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "COMMA":
             raise SyntaxError("Expected ',' after string value")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         number_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
 
         if Parser.tokenizer.next.type != "RPAREN":
             raise SyntaxError("Expected ')' after number value")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'HABLAR'")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         return Print(children=[StrVal(value=string_val), IntVal(value=number_val)])
 
     @staticmethod
@@ -375,21 +259,12 @@ class Parser:
             raise SyntaxError("Expected 'TAREFA' at the beginning of the conditional")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "DOT":
             raise SyntaxError("Expected '.' in the conditional")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         string_val = Parser.tokenizer.next.value
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         return BinOp(
             value="CONDICIONAL",
             children=[Identifier(value="TAREFA"), StrVal(value=string_val)],
@@ -403,32 +278,20 @@ class Parser:
             )
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'BLOCK_BEGIN'")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         statements = Parser.parse_statements()
 
         if Parser.tokenizer.next.type != "BLOCK_END":
             raise SyntaxError("Expected 'BLOCK_END' at the end of block statements")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         if Parser.tokenizer.next.type != "NEWLINE":
             raise SyntaxError("Expected newline after 'BLOCK_END'")
 
         Parser.tokenizer.select_next()
-        print(
-            f"token: {Parser.tokenizer.next.type} | type: {Parser.tokenizer.next.value}"
-        )
         return Block(children=statements)
 
     @staticmethod
