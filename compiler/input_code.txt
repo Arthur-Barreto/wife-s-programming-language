@@ -1,0 +1,29 @@
+HORA_DE_BRILHAR hummm teste de comentario
+    GRUNIDO hummm teste de comentario
+        TAREFA << (instagram, 1) 
+        TAREFA << (se_arrumando_para_sair, 3)
+        TAREFA << (soneca, 2)
+        TAREFA << (brigar_com_nenem, 1)
+        ENQUANTO_ELA_NAO_MUDA_DE_IDEIA TAREFA.se_arrumando_para_sair
+        TO_COM_FOME hummm teste de comentario
+            ACAO >> (maquiagem, 60)
+            ACAO >> (escolhendo_roupa, 60)
+            ACAO >> (arrumando_cabelo, 60)
+            HABLAR (vou_sair, 1)
+        QUERO_PITDAS
+        SE TAREFA.instagram
+        TO_COM_FOME
+            HABLAR (vou_sair, 1)
+            ACAO >> (tirando_foto, 30)
+            ACAO >> (postando_foto, 30)
+        QUERO_PITDAS
+    A_MIMIR
+    GRUNIDO
+        HABLAR (vou_dormir, 1)
+        TAREFA << (soneca, 2)
+        SE TAREFA.soneca
+        TO_COM_FOME
+            HABLAR (vou_comer, 1)
+        QUERO_PITDAS
+    A_MIMIR
+SEMPRE_DIVA
