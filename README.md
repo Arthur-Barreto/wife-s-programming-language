@@ -71,3 +71,7 @@ BLOCK = "{", "\n", { STATEMENT }, "}", "\n";
 ## Diagrama Sintático
 
 ![Diagrama Sintático](diagrama.png)
+
+## Para saber mais
+
+Leia o pdf em anexo, que explica um pouco mais sobre a linguagem e o processo de desenvolvimento.
