@@ -2,8 +2,8 @@ from node import Node
 
 
 class Block(Node):
-    def __init__(self, children):
-        super().__init__(None, children)
+    def __init__(self, value, children):
+        super().__init__(value, children)
 
     def evaluate(self, symble_table):
         time_spent = 0
@@ -13,6 +13,9 @@ class Block(Node):
                 time_spent += time
                 
         print(f"block time {time_spent}")
+        
+        if self.value == "PAI":
+            symble_table.reset_day_time()
         
         return time_spent
             

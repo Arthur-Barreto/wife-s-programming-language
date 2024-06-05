@@ -1,10 +1,17 @@
 HORA_DE_BRILHAR
-GRUNIDO
+    GRUNIDO
         HABLAR (vou_dormir, 5)
         TAREFA << (soneca, 200)
         SE TAREFA.soneca
         TO_COM_FOME
             HABLAR (vou_comer, 1)
+        QUERO_PITDAS
+    A_MIMIR
+        GRUNIDO
+        TAREFA << (insta, 60)
+        SE TAREFA.insta
+        TO_COM_FOME
+            HABLAR (postar, 5)
         QUERO_PITDAS
     A_MIMIR
 SEMPRE_DIVA

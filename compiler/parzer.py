@@ -30,7 +30,7 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-        block = Block(children=Parser.parse_days())
+        block = Block(children=Parser.parse_days(), value="INIT")
 
         if Parser.tokenizer.next.type != "SEMPRE_DIVA":
             raise SyntaxError("Expected 'SEMPRE_DIVA' at the end of the block")
@@ -75,7 +75,7 @@ class Parser:
 
         Parser.tokenizer.select_next()
 
-        return Block(children=statements)
+        return Block(children=statements, value="PAI")
 
     @staticmethod
     def parse_statements():
@@ -285,7 +285,7 @@ class Parser:
             raise SyntaxError("Expected newline after 'BLOCK_END'")
 
         Parser.tokenizer.select_next()
-        return Block(children=statements)
+        return Block(children=statements, value="if or while")
 
     @staticmethod
     def run(code):
