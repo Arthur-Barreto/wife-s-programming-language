@@ -48,3 +48,9 @@ Antes de rodar, de permissão de execução
 ```bash
 chmod +x compile.sh
 ```
+
+## Testando o código
+
+```bash
+./run < input_code.txt
+```
