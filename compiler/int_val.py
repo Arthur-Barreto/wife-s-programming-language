@@ -6,4 +6,4 @@ class IntVal(Node):
         super().__init__(value, [])
 
     def evaluate(self, symble_table):
-        return (self.value, "INT")
+        return self.value

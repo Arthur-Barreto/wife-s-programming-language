@@ -6,4 +6,4 @@ class Print(Node):
         super().__init__(None, children)
 
     def evaluate(self, symble_table):
-        print(self.children[0].evaluate(symble_table)[0])
+        print(self.children[0].evaluate(symble_table))

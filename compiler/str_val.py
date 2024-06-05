@@ -6,4 +6,4 @@ class StrVal(Node):
         super().__init__(value, [])
 
     def evaluate(self, symble_table):
-        return (self.value, "STRING")
+        return self.value

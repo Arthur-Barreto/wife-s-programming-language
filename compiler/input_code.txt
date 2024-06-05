@@ -1,9 +1,5 @@
 HORA_DE_BRILHAR
     GRUNIDO
-        TAREFA << (instagram, 1) 
-        TAREFA << (se_arrumando_para_sair, 3)
-        TAREFA << (soneca, 2)
-        TAREFA << (brigar_com_nenem, 1)
-        HABLAR (vou_dormir, 1)
+        HABLAR (vou_dormir, 10)
     A_MIMIR
 SEMPRE_DIVA
