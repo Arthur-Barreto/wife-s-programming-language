@@ -23,8 +23,8 @@ class Tokenizer:
             "TAREFA": "TAREFA",
             "HABLAR": "HABLAR",
             "ACAO": "ACAO",
-            "TO_COM_FOME": "TO_COM_FOME",
-            "QUERO_PITDAS": "QUERO_PITDAS",
+            "TO_COM_FOME": "BLOCK_BEGIN",
+            "QUERO_PITDAS": "BLOCK_END",
         }
 
         if len(self.source.strip()) == 0:
