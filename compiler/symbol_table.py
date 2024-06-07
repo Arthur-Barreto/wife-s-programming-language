@@ -36,7 +36,7 @@ class SymbolTable:
 
     def reset_day_time(self):
         self.day_time = 24 * 60
-        print("RESETANDO O TEMPO DO DIA")
+        self.symbol = {}
 
     def check_var_exists(self, key):
         return key in self.symbol

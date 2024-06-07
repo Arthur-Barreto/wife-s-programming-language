@@ -6,4 +6,11 @@ HORA_DE_BRILHAR
             HABLAR (fazendo_o_cabelo, 10)
         QUERO_PITDAS
     A_MIMIR
+    GRUNIDO
+        TAREFA << (novo, 1)
+        SE TAREFA.novo
+        TO_COM_FOME
+            HABLAR (oi, 1)
+        QUERO_PITDAS
+    A_MIMIR
 SEMPRE_DIVA
