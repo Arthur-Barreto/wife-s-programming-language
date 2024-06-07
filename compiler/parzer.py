@@ -55,7 +55,7 @@ class Parser:
     def parse_day():
         if Parser.tokenizer.next.type != "GRUNIDO":
             raise SyntaxError("Expected 'GRUNIDO' at the beginning of the day")
-
+        
         Parser.tokenizer.select_next()
 
         if Parser.tokenizer.next.type != "NEWLINE":
@@ -285,7 +285,7 @@ class Parser:
             raise SyntaxError("Expected newline after 'BLOCK_END'")
 
         Parser.tokenizer.select_next()
-        return Block(children=statements, value="if or while")
+        return Block(children=statements, value="PITDAS")
 
     @staticmethod
     def run(code):

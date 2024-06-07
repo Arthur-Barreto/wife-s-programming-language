@@ -12,10 +12,10 @@ class IfOp(Node):
         task_name = cond_node_ret[1]
         time_if_block = self.children[1].evaluate(symble_table)
         
-        print(f"conditional {conditional} task_name {task_name} time_if_block {time_if_block}")
-
         if conditional:
             print(f"{task_name} realizada, gastando {time_if_block} minutos")
             symble_table.consume_day_time(task_name, time_if_block)
             print(f"total de minutos restantes {symble_table.day_time}")
             symble_table.consume_token_time(task_name, time_if_block)
+        else:
+            raise Exception(f"Error: {task_name} mal planejada !")

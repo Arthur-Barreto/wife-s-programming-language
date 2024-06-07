@@ -12,10 +12,12 @@ class Block(Node):
             if time is not None:
                 time_spent += time
                 
-        print(f"block time {time_spent}")
-        
         if self.value == "PAI":
-            symble_table.reset_day_time()
+            # symble_table.reset_day_time()
+            pass
+            
+        elif self.value != "PITDAS":
+            print("hablar ....... fora de PITDAS")
         
         return time_spent
             

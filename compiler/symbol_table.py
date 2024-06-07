@@ -21,13 +21,11 @@ class SymbolTable:
         raise TypeError("Var not declared !")
 
     def consume_day_time(self, key, value):
-        if key in self.symbol:
-            self.day_time -= value
-            if self.day_time < 0:
-                raise TypeError("Time is up!")
-        else:
-            raise TypeError("Var not declared !")
-        
+
+        self.day_time -= value
+        if self.day_time < 0:
+            raise TypeError("Time is up!")
+
     def consume_token_time(self, key, value):
         if key in self.symbol:
             self.symbol[key] -= value
@@ -38,6 +36,7 @@ class SymbolTable:
 
     def reset_day_time(self):
         self.day_time = 24 * 60
+        print("RESETANDO O TEMPO DO DIA")
 
     def check_var_exists(self, key):
         return key in self.symbol
