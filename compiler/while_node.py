@@ -26,6 +26,8 @@ class WhileOp(Node):
                 print(f"{task_name} ainda tem {task_time} min")
             else:
                 print(f"O tempo acabou para {task_name} !")
+                
+            print(f"Você ainda tem {symble_table.day_time} min para este dia !")
 
         else:
             raise Exception(f"Error: {task_name} mal planejada !")

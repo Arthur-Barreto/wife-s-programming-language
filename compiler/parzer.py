@@ -1,9 +1,6 @@
 from tokenizer import Tokenizer
-from bin_op import BinOp
 from int_val import IntVal
 from no_op import NoOp
-from assignment import Assignment
-from identifier import Identifier
 from print_node import Print
 from block import Block
 from while_node import WhileOp
@@ -11,6 +8,7 @@ from if_node import IfOp
 from str_val import StrVal
 from var_dec import VarDec
 from conditional_node import ConditionalNode
+from action_node import ActionNode
 
 
 class Parser:
@@ -182,7 +180,7 @@ class Parser:
             raise SyntaxError("Expected newline after action declaration")
 
         Parser.tokenizer.select_next()
-        return VarDec(value="ACAO", children=[string_val, number_val])
+        return ActionNode(value=string_val)
 
     @staticmethod
     def parse_while_statement():

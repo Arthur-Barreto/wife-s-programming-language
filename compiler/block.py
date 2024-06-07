@@ -13,8 +13,7 @@ class Block(Node):
                 time_spent += time
                 
         if self.value == "PAI":
-            # symble_table.reset_day_time()
-            pass
+            symble_table.reset_day_time()
             
         elif self.value != "PITDAS":
             # print("hablar ....... fora de PITDAS")
