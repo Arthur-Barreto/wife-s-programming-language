@@ -180,7 +180,7 @@ class Parser:
             raise SyntaxError("Expected newline after action declaration")
 
         Parser.tokenizer.select_next()
-        return ActionNode(value=string_val)
+        return ActionNode(value=string_val, children=[number_val])
 
     @staticmethod
     def parse_while_statement():

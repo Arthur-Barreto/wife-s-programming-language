@@ -1,16 +1,29 @@
 HORA_DE_BRILHAR
     GRUNIDO
-        TAREFA << (se_arrumando_para_sair, 10)
-        SE TAREFA.se_arrumando_para_sair
+        TAREFA << (instagram, 100) 
+        TAREFA << (se_arrumando_para_sair, 300)
+        TAREFA << (soneca, 20)
+        TAREFA << (brigar_com_nenem, 10)
+        ENQUANTO_ELA_NAO_MUDA_DE_IDEIA TAREFA.se_arrumando_para_sair
         TO_COM_FOME
-            HABLAR (fazendo_o_cabelo, 10)
+            ACAO >> (maquiagem, 60)
+            ACAO >> (escolhendo_roupa, 60)
+            ACAO >> (arrumando_cabelo, 60)
+            HABLAR (vou_sair, 10)
+        QUERO_PITDAS
+        SE TAREFA.instagram
+        TO_COM_FOME
+            HABLAR (vou_sair, 1)
+            ACAO >> (tirando_foto, 30)
+            ACAO >> (postando_foto, 30)
         QUERO_PITDAS
     A_MIMIR
     GRUNIDO
-        TAREFA << (novo, 1)
-        SE TAREFA.novo
+        TAREFA << (soneca, 200)
+        SE TAREFA.soneca
         TO_COM_FOME
-            HABLAR (oi, 1)
+            HABLAR (vou_comer, 1)
+            ACAO >> (mimir, 150)
         QUERO_PITDAS
     A_MIMIR
 SEMPRE_DIVA

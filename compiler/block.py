@@ -17,6 +17,8 @@ class Block(Node):
             
         elif self.value != "PITDAS":
             # print("hablar ....... fora de PITDAS")
+            # node = self.children[0].evaluate(symble_table)
+            # print(f"node {node}")
             pass
         
         return time_spent

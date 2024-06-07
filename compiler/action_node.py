@@ -2,12 +2,11 @@ from node import Node
 
 
 class ActionNode(Node):
-    def __init__(self, value):
-        super().__init__(value, [])
+    def __init__(self, value, children):
+        super().__init__(value, children)
 
     def evaluate(self, symble_table):
         str_val = self.value
-        time_left = symble_table.get_identifier(str_val)
-        if time_left > 0:
-            print(f"Ela está fazendo {str_val} !")
-        return (time_left > 0, str_val)
+        action_time = self.children[0]
+        print(f"Ela fez '{str_val}' por {action_time} min !")
+

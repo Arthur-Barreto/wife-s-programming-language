@@ -10,7 +10,7 @@ class Print(Node):
         time = self.children[1].evaluate(symble_table)
         print(task)
         
-        # symble_table.consume_token_time(task, time)
         # symble_table.consume_day_time(task, time)
+        # print(f"Você ainda tem {symble_table.day_time} min para este dia !")
         
         return time
