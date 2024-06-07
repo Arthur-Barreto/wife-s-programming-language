@@ -5,68 +5,81 @@ Linguagem de programação baseada na minha esposa, focando em programar o dia a
 ## Exemplo de código
 
 ```bash
-hora_de_brilhar
-    grunido
-        tarefa << (instagram, 60) 
-        tarefa << (se_arrumando_para_sair, 60)
-        tarefa << (soneca, 120)
-        tarefa << (brigar_com_nenem, 15)
-        ENQUANTO_ELA_NAO_MUDA_DE_IDEIA tarefa.se_arrumando_para_sair
+HORA_DE_BRILHAR
+    GRUNIDO
+        TAREFA << (instagram, 1) 
+        TAREFA << (se_arrumando_para_sair, 3)
+        TAREFA << (soneca, 2)
+        TAREFA << (brigar_com_nenem, 1)
+        ENQUANTO_ELA_NAO_MUDA_DE_IDEIA TAREFA.se_arrumando_para_sair
         TO_COM_FOME
-            acao >> (maquiagem, 60)
-            acao >> (escolhendo_roupa, 60)
-            acao >> (arrumando_cabelo, 60)
-            hablar (vou_sair, 180)
+            ACAO >> (maquiagem, 60)
+            ACAO >> (escolhendo_roupa, 60)
+            ACAO >> (arrumando_cabelo, 60)
+            HABLAR (vou_sair, 1)
         QUERO_PITDAS
-        SE tarefa.instagram
+        SE TAREFA.instagram
         TO_COM_FOME
-            hablar (vou_sair, 60)
-            acao >> (tirando_foto, 30)
-            acao >> (postando_foto, 30)
+            HABLAR (vou_sair, 1)
+            ACAO >> (tirando_foto, 30)
+            ACAO >> (postando_foto, 30)
         QUERO_PITDAS
-    a_mimir
-    grunido
-        hablar (vou_dormir, 60)
-        tarefa << (soneca, 30)
-        SE tarefa.soneca
+    A_MIMIR
+    GRUNIDO
+        HABLAR (vou_dormir, 1)
+        TAREFA << (soneca, 2)
+        SE TAREFA.soneca
         TO_COM_FOME
-            hablar (vou_comer, 60)
+            HABLAR (vou_comer, 1)
         QUERO_PITDAS
-    a_mimir
-sempre_diva
+    A_MIMIR
+SEMPRE_DIVA
 ```
 
 ## EBNF
 
 PROGRAM = { BLOCK };
 
-BLOCK = "hora_de_brilhar", "\n", { DAY }, "sempre_diva", "\n";
+BLOCK = "HORA_DE_BRILHAR", "\n", { DAY }, "SEMPRE_DIVA", "\n";
 
-DAY = "grunido", "\n", { STATEMENT }, "a_mimir", "\n";
+DAY = "GRUNIDO", "\n", { STATEMENT }, "A_MIMIR", "\n";
 
-STATEMENT = ("λ" | TASK_DECLARATION | ACTION_DECLARATION | WHILE_STATEMENT | IF_STATEMENT | HABLAR), "\n";
+STATEMENT = ( "λ" 
+            | TASK_DECLARATION 
+            | WHILE_STATEMENT 
+            | IF_STATEMENT 
+            | BLOCK_STATEMENTS
+            ), "\n";
 
-TASK_DECLARATION = "tarefa", "<<", "(", STRING, ",", NUMBER, ")", "\n";
+BLOCK_STATEMENTS = "TO_COM_FOME", "\n", { BLOCK_SPECIFIC_STATEMENT }, "QUERO_PITDAS", "\n";
 
-ACTION_DECLARATION = "acao", ">>", "(", STRING, ",", NUMBER, ")", "\n";
+BLOCK_SPECIFIC_STATEMENT = ( HABLAR 
+                           | ACTION_DECLARATION
+                           ), "\n";
 
-WHILE_STATEMENT = "ENQUANTO_ELA_NAO_MUDA_DE_IDEIA", CONDICIONAL, "\n", BLOCK;
+TASK_DECLARATION = "TAREFA", "<<", "(", STRING, ",", NUMBER, ")";
 
-IF_STATEMENT = "SE", CONDICIONAL, "\n", BLOCK;
+ACTION_DECLARATION = "ACAO", ">>", "(", STRING, ",", NUMBER, ")";
 
-HABLAR = "hablar", "(", STRING, ",", NUMBER, ")", "\n";
+WHILE_STATEMENT = "ENQUANTO_ELA_NAO_MUDA_DE_IDEIA", CONDICIONAL, "\n", BLOCK_STATEMENTS;
 
-CONDICIONAL = "tarefa", ".", STRING;
+IF_STATEMENT = "SE", CONDICIONAL, "\n", BLOCK_STATEMENTS;
 
-STRING = {CHAR};
+HABLAR = "HABLAR", "(", STRING, ",", NUMBER, ")";
 
-CHAR = ("a" | ... | "z" | "A" | ... | "Z" | "0" | ... | "9" | "_" | " ");
+CONDICIONAL = "TAREFA", ".", STRING;
 
-NUMBER = {DIGIT};
+STRING = { CHAR };
+
+CHAR = ( "a" | ... | "z" 
+       | "A" | ... | "Z" 
+       | "0" | ... | "9" 
+       | "_" | " "
+       );
+
+NUMBER = { DIGIT };
 
 DIGIT = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
-
-BLOCK = "{", "\n", { STATEMENT }, "}", "\n";
 
 ## Diagrama Sintático
 
