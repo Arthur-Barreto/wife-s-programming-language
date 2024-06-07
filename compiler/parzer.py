@@ -53,7 +53,7 @@ class Parser:
     def parse_day():
         if Parser.tokenizer.next.type != "GRUNIDO":
             raise SyntaxError("Expected 'GRUNIDO' at the beginning of the day")
-        
+
         Parser.tokenizer.select_next()
 
         if Parser.tokenizer.next.type != "NEWLINE":
@@ -83,17 +83,20 @@ class Parser:
         return statements
 
     @staticmethod
+    def parse_block_specific_statements():
+        statements = []
+        while Parser.tokenizer.next.type not in ["BLOCK_END"]:
+            statements.append(Parser.parse_block_specific_statement())
+        return statements
+
+    @staticmethod
     def parse_statement():
         if Parser.tokenizer.next.type == "NEWLINE":
             Parser.tokenizer.select_next()
-
             return NoOp()
 
         elif Parser.tokenizer.next.type == "TAREFA":
             return Parser.parse_task_declaration()
-
-        elif Parser.tokenizer.next.type == "ACAO":
-            return Parser.parse_action_declaration()
 
         elif Parser.tokenizer.next.type == "ENQUANTO_ELA_NAO_MUDA_DE_IDEIA":
             return Parser.parse_while_statement()
@@ -101,14 +104,28 @@ class Parser:
         elif Parser.tokenizer.next.type == "SE":
             return Parser.parse_if_statement()
 
-        elif Parser.tokenizer.next.type == "HABLAR":
-            return Parser.parse_hablar_statement()
-
         elif Parser.tokenizer.next.type == "BLOCK_BEGIN":
             return Parser.parse_block_statements()
 
         else:
             raise SyntaxError(f"Invalid statement {Parser.tokenizer.next.type}")
+
+    @staticmethod
+    def parse_block_specific_statement():
+        if Parser.tokenizer.next.type == "NEWLINE":
+            Parser.tokenizer.select_next()
+            return NoOp()
+
+        elif Parser.tokenizer.next.type == "HABLAR":
+            return Parser.parse_hablar_statement()
+
+        elif Parser.tokenizer.next.type == "ACAO":
+            return Parser.parse_action_declaration()
+
+        else:
+            raise SyntaxError(
+                f"Invalid statement in block {Parser.tokenizer.next.type}"
+            )
 
     @staticmethod
     def parse_task_declaration():
@@ -201,7 +218,6 @@ class Parser:
 
     @staticmethod
     def parse_if_statement():
-        # print("entrei no caso do if")
         if Parser.tokenizer.next.type != "SE":
             raise SyntaxError("Expected 'SE' at the beginning of the if statement")
 
@@ -273,7 +289,7 @@ class Parser:
             raise SyntaxError("Expected newline after 'BLOCK_BEGIN'")
 
         Parser.tokenizer.select_next()
-        statements = Parser.parse_statements()
+        statements = Parser.parse_block_specific_statements()
 
         if Parser.tokenizer.next.type != "BLOCK_END":
             raise SyntaxError("Expected 'BLOCK_END' at the end of block statements")

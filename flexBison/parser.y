@@ -40,18 +40,24 @@ statements: statement
     | statements statement
     ;
 
-block_statements: BLOCK_BEGIN '\n' statements BLOCK_END '\n'
+block_statements: BLOCK_BEGIN '\n' block_specific_statements BLOCK_END '\n'
                 {
                     printf("Bloco de instruções\n");
                 }
                 ;
 
-statement:
-         TASK_DECLARATION
-         | ACTION_DECLARATION
+block_specific_statements: block_specific_statement
+                         | block_specific_statements block_specific_statement
+                         ;
+
+block_specific_statement: HABLAR_STATEMENT
+                        | ACTION_DECLARATION
+                        ;
+
+statement: TASK_DECLARATION
          | WHILE_STATEMENT
          | IF_STATEMENT
-         | HABLAR_STATEMENT
+         | block_statements
          ;
 
 TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' NUMBER ')' '\n'
@@ -61,22 +67,22 @@ TASK_DECLARATION: TAREFA TAREFA_DECLARATION '(' STRING ',' NUMBER ')' '\n'
                 ;
 
 ACTION_DECLARATION: ACAO ACAO_DECLARATION '(' STRING ',' NUMBER ')' '\n'
-                {
-                    printf("ACAO\n");
-                }
-                ;
+                  {
+                      printf("ACAO\n");
+                  }
+                  ;
 
 WHILE_STATEMENT: ENQUANTO_ELA_NAO_MUDA_DE_IDEIA CONDICIONAL '\n' block_statements
-                {
-                    printf("ENQUANTO\n");
-                }
-                ;
+               {
+                   printf("ENQUANTO\n");
+               }
+               ;
 
 IF_STATEMENT: SE CONDICIONAL '\n' block_statements
-                {
-                    printf("SE\n");
-                }
-                ;
+            {
+                printf("SE\n");
+            }
+            ;
 
 HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')' '\n'
                 {
@@ -85,10 +91,10 @@ HABLAR_STATEMENT: HABLAR '(' STRING ',' NUMBER ')' '\n'
                 ;
 
 CONDICIONAL: TAREFA DOT STRING
-                {
-                    printf("tarefa . string\n");
-                }
-                ;
+           {
+               printf("tarefa . string\n");
+           }
+           ;
 
 %%
 
