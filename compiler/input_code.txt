@@ -1,8 +1,9 @@
 HORA_DE_BRILHAR
     GRUNIDO
-        HABLAR (vou_dormir, 5)
+        TAREFA << (se_arrumando_para_sair, 10)
+        SE TAREFA.se_arrumando_para_sair
         TO_COM_FOME
-            HABLAR (oi, 10)
+            HABLAR (fazendo_o_cabelo, 10)
         QUERO_PITDAS
     A_MIMIR
 SEMPRE_DIVA

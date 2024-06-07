@@ -17,7 +17,8 @@ class Block(Node):
             pass
             
         elif self.value != "PITDAS":
-            print("hablar ....... fora de PITDAS")
+            # print("hablar ....... fora de PITDAS")
+            pass
         
         return time_spent
             

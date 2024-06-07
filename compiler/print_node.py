@@ -11,6 +11,6 @@ class Print(Node):
         print(task)
         
         # symble_table.consume_token_time(task, time)
-        symble_table.consume_day_time(task, time)
+        # symble_table.consume_day_time(task, time)
         
         return time
