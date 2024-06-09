@@ -44,18 +44,11 @@ BLOCK = "HORA_DE_BRILHAR", "\n", { DAY }, "SEMPRE_DIVA", "\n";
 
 DAY = "GRUNIDO", "\n", { STATEMENT }, "A_MIMIR", "\n";
 
-STATEMENT = ( "λ" 
-            | TASK_DECLARATION 
-            | WHILE_STATEMENT 
-            | IF_STATEMENT 
-            | BLOCK_STATEMENTS
-            ), "\n";
+STATEMENT = ( "λ" | TASK_DECLARATION | WHILE_STATEMENT | IF_STATEMENT | BLOCK_STATEMENTS), "\n";
 
 BLOCK_STATEMENTS = "TO_COM_FOME", "\n", { BLOCK_SPECIFIC_STATEMENT }, "QUERO_PITDAS", "\n";
 
-BLOCK_SPECIFIC_STATEMENT = ( HABLAR 
-                           | ACTION_DECLARATION
-                           ), "\n";
+BLOCK_SPECIFIC_STATEMENT = ( HABLAR | ACTION_DECLARATION), "\n";
 
 TASK_DECLARATION = "TAREFA", "<<", "(", STRING, ",", NUMBER, ")";
 
@@ -71,11 +64,7 @@ CONDICIONAL = "TAREFA", ".", STRING;
 
 STRING = { CHAR };
 
-CHAR = ( "a" | ... | "z" 
-       | "A" | ... | "Z" 
-       | "0" | ... | "9" 
-       | "_" | " "
-       );
+CHAR = ( "a" | "..." | "z" | "A" | "..." | "Z" "0" | "..." | "9" | "_" | " ");
 
 NUMBER = { DIGIT };
 
@@ -84,6 +73,11 @@ DIGIT = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9";
 ## Diagrama Sintático
 
 ![Diagrama Sintático](diagrama.png)
+
+## Flex/Bison e Compilação
+
+- Para validação do `flex` e `bison`, vá para o diretório **flexBison**.
+- Para compilar o código, vá para o diretório **compiler**.
 
 ## Para saber mais
 
