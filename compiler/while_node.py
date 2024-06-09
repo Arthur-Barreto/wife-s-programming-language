@@ -15,6 +15,8 @@ class WhileOp(Node):
         task_time = symble_table.get_identifier(task_name)
 
         if conditional:
+            
+            print("-+-"*17)
 
             while task_time > 0 and task_time >= while_block_time:
                 print(f"{task_name} ainda tem {task_time} min")
@@ -28,6 +30,8 @@ class WhileOp(Node):
                 print(f"O tempo acabou para {task_name} !")
                 
             print(f"Você ainda tem {symble_table.day_time} min para este dia !")
+            
+            print("-+-"*17)
 
         else:
             raise Exception(f"Error: {task_name} mal planejada !")

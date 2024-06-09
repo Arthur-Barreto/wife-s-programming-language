@@ -1,0 +1,65 @@
+--------------------------------------------------
+Ela fez 'maquiagem' por 60 min !
+--------------------------------------------------
+--------------------------------------------------
+Ela fez 'escolhendo_roupa' por 60 min !
+--------------------------------------------------
+--------------------------------------------------
+Ela fez 'arrumando_cabelo' por 60 min !
+--------------------------------------------------
+vou_sair
+-+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-
+se_arrumando_para_sair ainda tem 300 min
+se_arrumando_para_sair ainda tem 290 min
+se_arrumando_para_sair ainda tem 280 min
+se_arrumando_para_sair ainda tem 270 min
+se_arrumando_para_sair ainda tem 260 min
+se_arrumando_para_sair ainda tem 250 min
+se_arrumando_para_sair ainda tem 240 min
+se_arrumando_para_sair ainda tem 230 min
+se_arrumando_para_sair ainda tem 220 min
+se_arrumando_para_sair ainda tem 210 min
+se_arrumando_para_sair ainda tem 200 min
+se_arrumando_para_sair ainda tem 190 min
+se_arrumando_para_sair ainda tem 180 min
+se_arrumando_para_sair ainda tem 170 min
+se_arrumando_para_sair ainda tem 160 min
+se_arrumando_para_sair ainda tem 150 min
+se_arrumando_para_sair ainda tem 140 min
+se_arrumando_para_sair ainda tem 130 min
+se_arrumando_para_sair ainda tem 120 min
+se_arrumando_para_sair ainda tem 110 min
+se_arrumando_para_sair ainda tem 100 min
+se_arrumando_para_sair ainda tem 90 min
+se_arrumando_para_sair ainda tem 80 min
+se_arrumando_para_sair ainda tem 70 min
+se_arrumando_para_sair ainda tem 60 min
+se_arrumando_para_sair ainda tem 50 min
+se_arrumando_para_sair ainda tem 40 min
+se_arrumando_para_sair ainda tem 30 min
+se_arrumando_para_sair ainda tem 20 min
+se_arrumando_para_sair ainda tem 10 min
+O tempo acabou para se_arrumando_para_sair !
+Você ainda tem 1140 min para este dia !
+-+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+-
+vou_sair
+--------------------------------------------------
+Ela fez 'tirando_foto' por 30 min !
+--------------------------------------------------
+--------------------------------------------------
+Ela fez 'postando_foto' por 30 min !
+--------------------------------------------------
+**************************************************
+instagram ainda tem 99 min
+Você ainda tem 1139 min para este dia !
+**************************************************
+==================================================
+vou_comer
+--------------------------------------------------
+Ela fez 'mimir' por 150 min !
+--------------------------------------------------
+**************************************************
+soneca ainda tem 199 min
+Você ainda tem 1439 min para este dia !
+**************************************************
+==================================================
